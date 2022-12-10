@@ -21,6 +21,7 @@ INSERT INTO sailor VALUES ('santos-dos-santos@barcos.pt', 'Santos', 'dos Santos'
 INSERT INTO senior VALUES ('paulo-carreira@barcos.pt');
 INSERT INTO senior VALUES ('francisco-regateiro@barcos.pt');
 INSERT INTO senior VALUES ('pedro-dias@barcos.pt');
+INSERT INTO senior VALUES ('santos-dos-santos@barcos.pt');
 
 INSERT INTO junior VALUES ('xavier-fernandes@barcos.pt');
 INSERT INTO junior VALUES ('jose-brito@barcos.pt');
@@ -51,10 +52,12 @@ INSERT INTO valid_for VALUES('Spain','pedro-dias@barcos.pt', '2021-12-10');
 INSERT INTO  date_interval VALUES ('2021-10-10', '2021-10-20');
 INSERT INTO  date_interval VALUES ('2020-05-14', '2021-06-17');
 INSERT INTO  date_interval VALUES ('2023-11-01', '2021-11-02');
+INSERT INTO  date_interval VALUES ('2025-11-01', '2025-11-02');
 
 INSERT INTO reservation VALUES ('2021-10-10', '2021-10-20', 'Portugal', 'EFG8', 'paulo-carreira@barcos.pt');
 INSERT INTO reservation VALUES ('2020-05-14', '2021-06-17', 'Spain', 'SP1', 'pedro-dias@barcos.pt');
 INSERT INTO reservation VALUES ('2023-11-01', '2021-11-02', 'Portugal', 'ABC1', 'francisco-regateiro@barcos.pt');
+INSERT INTO reservation VALUES ('2025-11-01', '2025-11-02', 'Portugal', 'ABC1', 'santos-dos-santos@barcos.pt');
 
 INSERT INTO authorised VALUES ('paulo-carreira@barcos.pt', '2021-10-10', '2021-10-12', 'Portugal', 'EFG8');
 INSERT INTO authorised VALUES ('xavier-fernandes@barcos.pt', '2021-10-10', '2021-10-12', 'Portugal', 'EFG8');
@@ -65,6 +68,9 @@ INSERT INTO authorised VALUES ('bernardo-silva@barcos.pt', '2020-05-14', '2021-0
 
 INSERT INTO authorised VALUES ('francisco-regateiro@barcos.pt', '2023-11-01', '2021-11-02', 'Portugal', 'ABC1');
 INSERT INTO authorised VALUES ('jose-brito@barcos.pt', '2023-11-01', '2021-11-02', 'Portugal', 'ABC1');
+
+INSERT INTO authorised VALUES ('santos-dos-santos@barcos.pt', '2025-11-01', '2025-11-02', 'Portugal', 'ABC1');
+
 
 INSERT INTO trip VALUES ('2021-10-10', '2021-10-20', 'Portugal', 'EFG8',
                          '2021-10-11', '2021-10-19',

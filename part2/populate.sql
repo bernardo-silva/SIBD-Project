@@ -59,9 +59,9 @@ INSERT INTO reservation VALUES ('2020-05-14', '2021-06-17', 'Spain', 'SP1', 'ped
 INSERT INTO reservation VALUES ('2023-11-01', '2021-11-02', 'Portugal', 'ABC1', 'francisco-regateiro@barcos.pt');
 INSERT INTO reservation VALUES ('2025-11-01', '2025-11-02', 'Portugal', 'ABC1', 'santos-dos-santos@barcos.pt');
 
-INSERT INTO authorised VALUES ('paulo-carreira@barcos.pt', '2021-10-10', '2021-10-12', 'Portugal', 'EFG8');
-INSERT INTO authorised VALUES ('xavier-fernandes@barcos.pt', '2021-10-10', '2021-10-12', 'Portugal', 'EFG8');
-INSERT INTO authorised VALUES ('pedro-dias@barcos.pt', '2021-10-10', '2021-10-12', 'Portugal', 'EFG8');
+INSERT INTO authorised VALUES ('paulo-carreira@barcos.pt', '2021-10-10', '2021-10-20', 'Portugal', 'EFG8');
+INSERT INTO authorised VALUES ('xavier-fernandes@barcos.pt', '2021-10-10', '2021-10-20', 'Portugal', 'EFG8');
+INSERT INTO authorised VALUES ('pedro-dias@barcos.pt', '2021-10-10', '2021-10-20', 'Portugal', 'EFG8');
 
 INSERT INTO authorised VALUES ('pedro-dias@barcos.pt', '2020-05-14', '2021-06-17', 'Spain', 'SP1');
 INSERT INTO authorised VALUES ('bernardo-silva@barcos.pt', '2020-05-14', '2021-06-17', 'Spain', 'SP1');

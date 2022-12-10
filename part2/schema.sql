@@ -25,12 +25,6 @@ CREATE TABLE sailor(
     -- the 'junior' table
 );
 
-CREATE TABLE boat_class(
-    name VARCHAR(10),
-    max_length NUMERIC(3,1) NOT NULL,
-    PRIMARY KEY(name)
-);
-
 CREATE TABLE senior(
     email VARCHAR(254),
     PRIMARY KEY(email),
@@ -47,10 +41,10 @@ CREATE TABLE junior(
     -- A junior sailor cannot exist in the 'senior' table
 );
 
-CREATE TABLE date_interval(
-    start_date TIMESTAMP,
-    end_date TIMESTAMP,
-    PRIMARY KEY(start_date, end_date)
+CREATE TABLE boat_class(
+    name VARCHAR(10),
+    max_length NUMERIC(3,1) NOT NULL,
+    PRIMARY KEY(name)
 );
 
 CREATE TABLE boat(
@@ -67,8 +61,8 @@ CREATE TABLE boat(
 
 CREATE TABLE sailing_certificate(
     sailor_email VARCHAR(254),
-    issue_date TIMESTAMP,
-    expiry_date TIMESTAMP NOT NULL,
+    issue_date DATE,
+    expiry_date DATE NOT NULL,
     for_class VARCHAR(10) NOT NULL,
     PRIMARY KEY(sailor_email,issue_date),
     FOREIGN KEY(sailor_email) REFERENCES sailor(email),
@@ -85,6 +79,12 @@ CREATE TABLE valid_for(
     PRIMARY KEY(country_name, sailor_email, issue_date),
     FOREIGN KEY(country_name) REFERENCES country(name),
     FOREIGN KEY(sailor_email, issue_date) REFERENCES sailing_certificate(sailor_email, issue_date)
+);
+
+CREATE TABLE date_interval(
+    start_date TIMESTAMP,
+    end_date TIMESTAMP,
+    PRIMARY KEY(start_date, end_date)
 );
 
 CREATE TABLE reservation(

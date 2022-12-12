@@ -1,3 +1,17 @@
+DROP TABLE IF EXISTS junior;
+DROP TABLE IF EXISTS valid_for;
+DROP TABLE IF EXISTS sailing_certificate;
+DROP TABLE IF EXISTS authorised;
+DROP TABLE IF EXISTS trip;
+DROP TABLE IF EXISTS location;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS senior;
+DROP TABLE IF EXISTS sailor;
+DROP TABLE IF EXISTS boat;
+DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS boat_class;
+DROP TABLE IF EXISTS date_interval;
+
 CREATE TABLE country(
     name VARCHAR(70),
     iso_code CHAR(3) NOT NULL,

@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS date_interval;
 
 CREATE TABLE country(
     name VARCHAR(70),
-    iso_code CHAR(3) NOT NULL,
+    iso_code VARCHAR(3) NOT NULL,
     flag VARCHAR(2083) NOT NULL,
     PRIMARY KEY(name),
     UNIQUE(iso_code)
@@ -27,6 +27,7 @@ CREATE TABLE location(
     jurisdiction_of VARCHAR(70) NOT NULL,
     PRIMARY KEY(latitude, longitude),
     FOREIGN KEY(jurisdiction_of) REFERENCES country(name)
+    -- Any two locations must be one nautical mile apart
 );
 
 CREATE TABLE sailor(
@@ -34,9 +35,8 @@ CREATE TABLE sailor(
     first_name VARCHAR(40) NOT NULL,
     surname VARCHAR(40) NOT NULL,
     PRIMARY KEY(email)
-
-    -- No sailor can exist at the same time in the 'senior' table and
-    -- the 'junior' table
+    -- No sailor can exist in the 'senior' table and the 'junior' table
+    -- at the same time
 );
 
 CREATE TABLE senior(
@@ -63,7 +63,7 @@ CREATE TABLE boat_class(
 
 CREATE TABLE boat(
     country_name VARCHAR(70),
-    cni CHAR(14),
+    cni VARCHAR(14),
     boat_name VARCHAR(80) NOT NULL,
     length NUMERIC(3,1) NOT NULL,
     year NUMERIC(4,0) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE reservation(
     start_date TIMESTAMP,
     end_date TIMESTAMP,
     country_name VARCHAR(70),
-    cni CHAR(14),
+    cni VARCHAR(14),
     responsible_email VARCHAR(254),
     PRIMARY KEY(start_date, end_date, country_name, cni),
     FOREIGN KEY(start_date, end_date) REFERENCES date_interval(start_date, end_date),
@@ -119,7 +119,7 @@ CREATE TABLE authorised(
     start_date TIMESTAMP,
     end_date TIMESTAMP,
     country_name VARCHAR(70),
-    cni CHAR(14),
+    cni VARCHAR(14),
     PRIMARY KEY(start_date, end_date, country_name, cni, email),
     FOREIGN KEY(start_date, end_date, country_name, cni) REFERENCES reservation(start_date, end_date, country_name, cni),
     FOREIGN KEY(email) REFERENCES sailor(email)
@@ -129,7 +129,7 @@ CREATE TABLE trip(
     res_start_date TIMESTAMP,
     res_end_date TIMESTAMP,
     country_name VARCHAR(70),
-    cni CHAR(14),
+    cni VARCHAR(14),
     take_off_date TIMESTAMP,
     arrival_date TIMESTAMP NOT NULL,
     insurance VARCHAR(20) NOT NULL,
@@ -142,5 +142,6 @@ CREATE TABLE trip(
     FOREIGN KEY(res_start_date, res_end_date, country_name, cni) REFERENCES reservation(start_date, end_date, country_name, cni),
     FOREIGN KEY(skipper_email) REFERENCES sailor(email),
     FOREIGN KEY(from_latitude, from_longitude) REFERENCES location(latitude,longitude),
-    FOREIGN KEY(to_latitude, to_longitude) REFERENCES location(latitude, longitude)
+    FOREIGN KEY(to_latitude, to_longitude) REFERENCES location(latitude, longitude),
+    CHECK(take_off_date > trip.res_start_date)
 );

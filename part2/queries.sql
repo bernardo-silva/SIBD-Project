@@ -1,12 +1,12 @@
 -- A. The name of all boats that are used in some trip.
-SELECT boat_name
+SELECT DISTINCT boat_name
 FROM boat b
     JOIN trip t
         ON b.cni = t.cni AND b.country_name = t.country_name
 ;
 
 -- B. The name of all boats that are not used in any trip.
-SELECT boat_name
+SELECT DISTINCT boat_name
 FROM boat b
 WHERE (b.country_name, b.cni) NOT IN(
     SELECT country_name, cni
@@ -15,7 +15,7 @@ WHERE (b.country_name, b.cni) NOT IN(
 
 -- C. The name of all boats registered in 'PRT' (ISO code) for which at least one responsible for a
 -- reservation has a surname that ends with 'Santos'.
-SELECT boat_name
+SELECT DISTINCT boat_name
 FROM boat
     JOIN reservation r
         ON boat.country_name = r.country_name AND boat.cni = r.cni
@@ -30,7 +30,7 @@ WHERE c.iso_code = 'PRT' and sa.surname LIKE '%Santos'
 
 -- D. The full name of all skippers without any certificate corresponding
 -- to the class of the trip’s boat.
-SELECT CONCAT(first_name, ' ', surname) as full_name
+SELECT DISTINCT CONCAT(first_name, ' ', surname) as full_name
 FROM sailor s
     JOIN trip t
         ON t.skipper_email = s.email

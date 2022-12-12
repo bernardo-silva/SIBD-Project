@@ -1,13 +1,21 @@
+-- Query A
 #,boat_name
-1,Barquito
-2,Barcão
-3,Embarcacion
+1,Barcão
+2,Barco
+3,Barquito
+4,Embarcacion
 
+-- Query B
 #,boat_name
 1,Barconcillo
 
+-- Query C
 #,boat_name
 1,Barquito
 
+-- Query D
 #,full_name
-1,Pedro Dias
+1,Bernardo Silva
+2,José Brito
+3,Pedro Dias
+

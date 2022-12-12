@@ -15,7 +15,6 @@ WHERE (b.country_name, b.cni) NOT IN(
 
 -- C. The name of all boats registered in 'PRT' (ISO code) for which at least one responsible for a
 -- reservation has a surname that ends with 'Santos'.
---SELECT *
 SELECT boat_name
 FROM boat
     JOIN reservation r
@@ -29,16 +28,8 @@ FROM boat
 WHERE c.iso_code = 'PRT' and sa.surname LIKE '%Santos'
 ;
 
--- D. The full name of all skippers without any certificate corresponding to the class of the trip’s boat.
---SELECT CONCAT(first_name, ' ', surname) as full_name
-SELECT *
-FROM trip t
-    JOIN sailor s
-        ON t.skipper_email = s.email
-    JOIN boat b
-        ON b.cni = t.cni AND b.country_name = t.country_name;
-
-
+-- D. The full name of all skippers without any certificate corresponding
+-- to the class of the trip’s boat.
 SELECT CONCAT(first_name, ' ', surname) as full_name
 FROM sailor s
     JOIN trip t
@@ -50,10 +41,5 @@ WHERE b.has_class_name NOT IN (
     FROM sailing_certificate as sc
     WHERE sc.sailor_email = t.skipper_email)
 ;
-
-SELECT *
-FROM trip t
-    JOIN sailor s
-
 
 

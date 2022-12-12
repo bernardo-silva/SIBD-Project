@@ -36,12 +36,14 @@ INSERT INTO boat VALUES ('Portugal', 'ABC1', 'Barquito', 4, 2000, 'A');
 INSERT INTO boat VALUES ('Portugal', 'EFG8', 'Barcão', 18, 2008, 'D');
 INSERT INTO boat VALUES ('Spain', 'SP1', 'Embarcacion', 7, 2002, 'B');
 INSERT INTO boat VALUES ('Spain', 'SP2', 'Barconcillo', 13, 2014, 'C');
+INSERT INTO boat VALUES ('Brazil', 'BR1A', 'Barco', 4.5, 2001, 'A');
 
 INSERT INTO sailing_certificate VALUES('paulo-carreira@barcos.pt', '2000-12-10', '2100-12-10', 'D');
 INSERT INTO sailing_certificate VALUES('paulo-carreira@barcos.pt', '2003-12-10', '2089-12-10', 'C');
 INSERT INTO sailing_certificate VALUES('francisco-regateiro@barcos.pt', '2000-12-10', '2100-12-10', 'B');
-INSERT INTO sailing_certificate VALUES('xavier-fernandes@barcos.pt', '2022-12-10', '2024-12-10', 'A');
+INSERT INTO sailing_certificate VALUES('xavier-fernandes@barcos.pt', '2022-12-10', '2027-12-10', 'A');
 INSERT INTO sailing_certificate VALUES('pedro-dias@barcos.pt', '2021-12-10', '2023-12-10', 'B');
+INSERT INTO sailing_certificate VALUES('pedro-dias@barcos.pt', '2020-12-10', '2024-12-10', 'C');
 
 INSERT INTO valid_for VALUES('Portugal', 'paulo-carreira@barcos.pt', '2000-12-10');
 INSERT INTO valid_for VALUES('Spain','paulo-carreira@barcos.pt', '2003-12-10');
@@ -49,15 +51,19 @@ INSERT INTO valid_for VALUES('Portugal','francisco-regateiro@barcos.pt', '2000-1
 INSERT INTO valid_for VALUES('Brazil','xavier-fernandes@barcos.pt', '2022-12-10');
 INSERT INTO valid_for VALUES('Spain','pedro-dias@barcos.pt', '2021-12-10');
 
-INSERT INTO  date_interval VALUES ('2021-10-10', '2021-10-20');
-INSERT INTO  date_interval VALUES ('2020-05-14', '2021-06-17');
-INSERT INTO  date_interval VALUES ('2023-11-01', '2021-11-02');
-INSERT INTO  date_interval VALUES ('2025-11-01', '2025-11-02');
+INSERT INTO date_interval VALUES ('2021-10-10', '2021-10-20');
+INSERT INTO date_interval VALUES ('2020-05-14', '2021-06-17');
+INSERT INTO date_interval VALUES ('2023-11-01', '2021-11-02');
+INSERT INTO date_interval VALUES ('2025-11-01', '2025-11-02');
+INSERT INTO date_interval VALUES ('2022-10-10', '2022-10-20');
+INSERT INTO date_interval VALUES ('2026-05-15', '2026-07-15');
 
 INSERT INTO reservation VALUES ('2021-10-10', '2021-10-20', 'Portugal', 'EFG8', 'paulo-carreira@barcos.pt');
 INSERT INTO reservation VALUES ('2020-05-14', '2021-06-17', 'Spain', 'SP1', 'pedro-dias@barcos.pt');
 INSERT INTO reservation VALUES ('2023-11-01', '2021-11-02', 'Portugal', 'ABC1', 'francisco-regateiro@barcos.pt');
 INSERT INTO reservation VALUES ('2025-11-01', '2025-11-02', 'Portugal', 'ABC1', 'santos-dos-santos@barcos.pt');
+INSERT INTO reservation VALUES ('2022-10-10', '2022-10-20', 'Spain', 'SP1', 'santos-dos-santos@barcos.pt');
+INSERT INTO reservation VALUES ('2026-05-15', '2026-07-15', 'Brazil', 'BR1A', 'francisco-regateiro@barcos.pt');
 
 INSERT INTO authorised VALUES ('paulo-carreira@barcos.pt', '2021-10-10', '2021-10-20', 'Portugal', 'EFG8');
 INSERT INTO authorised VALUES ('xavier-fernandes@barcos.pt', '2021-10-10', '2021-10-20', 'Portugal', 'EFG8');
@@ -70,6 +76,12 @@ INSERT INTO authorised VALUES ('francisco-regateiro@barcos.pt', '2023-11-01', '2
 INSERT INTO authorised VALUES ('jose-brito@barcos.pt', '2023-11-01', '2021-11-02', 'Portugal', 'ABC1');
 
 INSERT INTO authorised VALUES ('santos-dos-santos@barcos.pt', '2025-11-01', '2025-11-02', 'Portugal', 'ABC1');
+
+INSERT INTO authorised VALUES ('santos-dos-santos@barcos.pt', '2022-10-10', '2022-10-20', 'Spain', 'SP1');
+INSERT INTO authorised VALUES ('pedro-dias@barcos.pt', '2022-10-10', '2022-10-20', 'Spain', 'SP1');
+
+INSERT INTO authorised VALUES ('xavier-fernandes@barcos.pt', '2026-05-15', '2026-07-15', 'Brazil', 'BR1A');
+INSERT INTO authorised VALUES ('francisco-regateiro@barcos.pt', '2026-05-15', '2026-07-15', 'Brazil', 'BR1A');
 
 
 INSERT INTO trip VALUES ('2021-10-10', '2021-10-20', 'Portugal', 'EFG8',
@@ -89,3 +101,15 @@ INSERT INTO trip VALUES ('2023-11-01', '2021-11-02', 'Portugal', 'ABC1',
                          'AAA-HUE-999', 'jose-brito@barcos.pt',
                          38.704908, -9.145890,
                          38.652309, -9.079597);
+
+INSERT INTO trip VALUES ('2022-10-10', '2022-10-20', 'Spain', 'SP1',
+                         '2022-10-11', '2022-10-19',
+                         'ADA-asd-1913', 'pedro-dias@barcos.pt',
+                         38.845133, 0.120084,
+                         38.909212, 1.440670);
+
+INSERT INTO trip VALUES ('2026-05-15', '2026-07-15', 'Brazil', 'BR1A',
+                     '2026-06-15', '2026-07-01',
+                     'AAA-HUE-700', 'xavier-fernandes@barcos.pt',
+                     -5.775032, -35.206148,
+                     -5.775032, -35.206148);

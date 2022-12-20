@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
-from utils import get_index_html, set_active_page, print_html
-import psycopg2
+from utils import print_html, get_html_table, connect_to_database
 
 IST_ID = 'ist193365'
 host = 'db.tecnico.ulisboa.pt'
@@ -10,14 +9,27 @@ password = 'yczp2585'
 db_name = IST_ID
 
 
-def connect_to_database():
-    connect_query = f"host={host} port={port} user={IST_ID} password={password} dbname={db_name}"
-    connection = psycopg2.connect(connect_query)
+def sailors():
+    try:
+        connection = connect_to_database(host, port, IST_ID, password, db_name)
+        cursor = connection.cursor()
 
-    return connection
-    print(connection)
+        query = "SELECT * FROM sailor;"
+        cursor.execute(query)
+        result = cursor.fetchall()
+
+        table = get_html_table(result, ["E-mail", "First Name", "Last Name"])
+
+        print_html(table, "SAILORS")
+    except Exception as e:
+        print_html(f"<h1>An error occurred!</h1><p>{e}</p>", "SAILORS")
+    finally:
+        if connection is not None:
+            connection.close()
+        
+        
+        
 
 
 if __name__ == "__main__":
-    connect_to_database()
-    print_html("")
+    sailors()

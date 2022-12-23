@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-
-from utils import print_html, get_html_table, connect_to_database, Action
 import sys
-
 sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
+
+from utils import print_html, connect_to_database, Action
+from utils import get_html_table, get_button
 from credentials import host, port, IST_ID, password, db_name
 
 
@@ -39,7 +39,10 @@ def reservations():
                                    "Boat CNI", "Responsible Sailor", "", "", ""],
                                [action_remove, action_authorize, action_deauthorize])
 
-        print_html(table, "RESERVATIONS", "RESERVATIONS")
+        add_reservation_btn = get_button("Add reservation <b>+</b>",
+                                    "/cgi-bin/reservation/add_reservation.cgi")
+
+        print_html(table + add_reservation_btn, "RESERVATIONS", "RESERVATIONS")
     except Exception as e:
         print_html(
             f"<h1>An error occurred!</h1><p>{e}</p>", "RESERVATIONS", "RESERVATIONS")

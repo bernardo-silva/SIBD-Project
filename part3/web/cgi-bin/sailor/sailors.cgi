@@ -1,11 +1,10 @@
 #!/usr/bin/python3
+import sys
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
+from credentials import host, port, IST_ID, password, db_name
 from utils import print_html, connect_to_database, Action
 from utils import get_button, get_html_table
-import sys
-
-sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
-from credentials import host, port, IST_ID, password, db_name
 
 
 def sailors():
@@ -26,7 +25,8 @@ def sailors():
                                ["First Name", "Last Name", "E-mail", ""],
                                [action])
 
-        add_sailor_btn = get_button("Add sailor <b>+</b>", "/cgi-bin/add_sailor.cgi")
+        add_sailor_btn = get_button("Add sailor <b>+</b>",
+                                    "/cgi-bin/sailor/add_sailor.cgi")
 
         print_html(table + add_sailor_btn, "SAILORS", "SAILORS")
     except Exception as e:

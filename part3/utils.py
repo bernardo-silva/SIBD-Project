@@ -74,14 +74,28 @@ def get_button(text, href, color="primary"):
     return button
 
 
-def get_form(entries, labels, types):
-    form = '\n\t<form action="add_sailor_update.cgi" method="post">'
+def get_form(entries, labels, types, action, radios=None):
+    form = f'\n\t<form action="{action}" method="post">'
     for entry, label, ftype in zip(entries, labels, types):
         form += '\n\t\t<div class="mb-3">'
         form += f'\n\t\t\t<label for="{entry}" class="form-label">{label}</label>'
         form += f'\n\t\t\t<input type="{ftype}" class="form-control" name="{entry}" id="{entry}">'
         form += '\n\t\t</div>'
 
+    if radios is not None:
+        form += get_radios(**radios)
+
     form += '\n\t<p><input type="submit" class="btn btn-primary" value="Submit"/></p>'
     form += '\n\t</form>'
     return form
+
+
+def get_radios(name, entries, labels, rtype="checkbox"):
+    radios = ""
+    for n, (entry, label) in enumerate(zip(entries, labels)):
+        radios += '\n\t<div class="form-check form-check-inline">'
+        radios += f'\n\t\t<input class="form-check-input" type="{rtype}" '
+        radios += f'name={name} id="{entry}" value="{entry}" {"checked" if n==0 else ""}>'
+        radios += f'\n\t\t<label class="form-check-label" for="{entry}">{label}</label>'
+        radios += '\n\t</div>'
+    return radios

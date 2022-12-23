@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 
-from utils import print_html, get_html_table, connect_to_database
+from utils import print_html, connect_to_database, Action
+from utils import get_button, get_html_table
+import sys
 
-IST_ID = 'ist193365'
-host = 'db.tecnico.ulisboa.pt'
-port = 5432
-password = 'yczp2585'
-db_name = IST_ID
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
+from credentials import host, port, IST_ID, password, db_name
 
 
 def sailors():
@@ -18,17 +17,24 @@ def sailors():
         cursor.execute(query)
         result = cursor.fetchall()
 
-        table = get_html_table(result, ["E-mail", "First Name", "Last Name"])
+        action = Action(description="Remove sailor",
+                        script="remove_sailor.cgi",
+                        parameters=["email"],
+                        columns=[2])
 
-        print_html(table, "SAILORS")
+        table = get_html_table(result,
+                               ["First Name", "Last Name", "E-mail", ""],
+                               [action])
+
+        add_sailor_btn = get_button("Add sailor <b>+</b>", "/cgi-bin/add_sailor.cgi")
+
+        print_html(table + add_sailor_btn, "SAILORS", "SAILORS")
     except Exception as e:
-        print_html(f"<h1>An error occurred!</h1><p>{e}</p>", "SAILORS")
+        print_html(
+            f"<h1>An error occurred!</h1><p>{e}</p>", "SAILORS", "SAILORS")
     finally:
         if connection is not None:
             connection.close()
-        
-        
-        
 
 
 if __name__ == "__main__":

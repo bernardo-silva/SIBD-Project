@@ -8,9 +8,10 @@
 SELECT b.country
 FROM boat b
 GROUP BY b.country
-HAVING COUNT(*) >= ALL (
+HAVING COUNT(*) > ALL (
     SELECT COUNT(*)
     FROM boat
+    WHERE country <> b.country
     GROUP BY country
 );
 

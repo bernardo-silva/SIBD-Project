@@ -15,15 +15,14 @@ RETURNS TRIGGER AS
 $$
 BEGIN
     -- Checks for disjoint specialization of sailor
-    -- 1 - Selects emails corresponding to the union of all senior and junior sailors, including duplicates
-    -- 2 - Selects emails from sailors table
-    -- 3 - EXCEPT ALL keeps the emails that exist in the first table that do not exist in second table
-    -- 4 - Using UNION ALL and EXCEPT ALL is crucial, if a sailor is present in both senior and junior
-    --     his email will appear twice due to UNION ALL. EXCEPT ALL will remove all entries except for
-    --     the duplicate one, meaning the IF condition will trigger.
-    IF EXISTS((SELECT email FROM senior UNION ALL SELECT email FROM junior)
-              EXCEPT ALL
-              SELECT email FROM sailor)
+    -- 1 - Selects emails from senior sailors
+    -- 2 - Selects emails from junior sailors
+    -- 3 - INTERSECT keeps the emails that exist in both tables
+    -- 4 - If an email remains, then it exists in both tables, meaning a sailor is both senior
+    --     and junior
+    IF EXISTS((SELECT email FROM senior)
+              INTERSECT
+              SELECT email FROM junior)
     THEN
         RAISE EXCEPTION 'A sailor cannot exist in both the senior table and the junior table';
     END IF;
@@ -74,23 +73,19 @@ DROP TRIGGER IF EXISTS tg_check_trip_overlap ON trip;
 CREATE OR REPLACE FUNCTION check_trip_overlap()
 RETURNS TRIGGER AS
 $$
-DECLARE
-    -- Creates a cursor that encapsulates a query that selects all trips from the same reservation
-    trip_cursor CURSOR FOR
-        SELECT *
-        FROM trip
-        WHERE (reservation_start_date, reservation_end_date, boat_country, cni) =
-              (NEW.reservation_start_date, NEW.reservation_end_date, NEW.boat_country, NEW.cni);
 BEGIN
-    -- Iterate over all rows in the cursor (i.e., iterate over all trips in the same reservation)
-    FOR trip_row in trip_cursor
-        LOOP
-             -- If the new trip's dates overlap an already existing trip, then raise an exception
-             IF (NEW.takeoff <= trip_row.arrival AND NEW.arrival >= trip_row.takeoff) THEN
-                RAISE EXCEPTION
-                'This trip would overlap with an already existing trip on the same reservation';
-            END IF;
-        END LOOP;
+    -- If a trip from the same reservation as the new one has overlapping dates
+    -- then the new trip cannot be inserted.
+    IF EXISTS(SELECT * FROM trip AS t
+              WHERE t.cni = NEW.cni
+              AND t.boat_country = NEW.boat_country
+              AND t.reservation_start_date = NEW.reservation_start_date
+              AND t.reservation_end_date = NEW.reservation_end_date
+              AND (t.arrival >= NEW.takeoff AND t.takeoff <= NEW.arrival))
+    THEN
+        RAISE EXCEPTION  'Takeoff and arrival dates of new trip overlap with an existing trip';
+    END IF;
+
     RETURN NEW;
 END;
 $$ language plpgsql;

@@ -26,13 +26,15 @@ def add_sailor_update():
 
         query = "INSERT INTO sailor VALUES (%s, %s, %s);"
         cursor.execute(query, data)
-        connection.commit()
 
         # CONVERT THIS TO SINGLE QUERY
         if senior == "senior":
             query2 = "INSERT INTO senior VALUES (%s);"
         elif senior == "junior":
             query2 = "INSERT INTO junior VALUES (%s);"
+        else:
+            query2 = ""
+            cursor.rollback()
 
         cursor.execute(query2, (email,))
         connection.commit()
@@ -42,6 +44,7 @@ def add_sailor_update():
     except Exception as e:
         print_html(
             f"<h1>An error occurred!</h1><p>{e}</p>", "Error", "SAILORS")
+        connection.rollback()
     finally:
         if connection is not None:
             connection.close()

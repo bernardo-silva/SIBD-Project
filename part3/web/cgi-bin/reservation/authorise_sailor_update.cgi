@@ -1,37 +1,31 @@
 #!/usr/bin/python3
-import cgi
 import sys
 sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from credentials import host, port, IST_ID, password, db_name
+import cgi
 from utils import print_html, connect_to_database
 
 
-def add_sailor_update():
+def authorise_sailor_update():
     try:
         form = cgi.FieldStorage()
         start_date = form.getvalue('start_date')
         end_date = form.getvalue('end_date')
         country = form.getvalue('country')
         cni = form.getvalue('cni')
-        responsible = form.getvalue('responsible')
+        email = form.getvalue('sailor_email')
 
-        dates = [start_date, end_date]
-        boat = [country, cni]
+        data = (start_date, end_date, country, cni, email)
 
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
 
-        date_interval_query = "INSERT INTO date_interval VALUES (%s, %s);"
-        cursor.execute(date_interval_query, dates)
-
-        query = "INSERT INTO reservation VALUES (%s, %s, %s, %s, %s);"
-        cursor.execute(query, dates + boat + [responsible])
-
+        query = "INSERT INTO authorised VALUES (%s, %s, %s, %s, %s);"
+        cursor.execute(query, data)
         connection.commit()
 
-        print_html(query % tuple(dates + boat + [responsible]),
-                   "Reservation added", "RESERVATIONS")
+        print_html(query % data, "Sailor authorised", "RESERVATIONS")
 
     except Exception as e:
         print_html(
@@ -42,4 +36,4 @@ def add_sailor_update():
 
 
 if __name__ == "__main__":
-    add_sailor_update()
+    authorise_sailor_update()

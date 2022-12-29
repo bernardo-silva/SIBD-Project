@@ -22,14 +22,14 @@ def reservations():
                                            "cni"],
                                columns=[0, 1, 2, 3])
 
-        action_authorize = Action(description="Authorize Sailors",
-                                  script="authorize_sailors.cgi",
+        action_authorize = Action(description="Authorise Sailors",
+                                  script="authorise_sailor.cgi",
                                   parameters=["start_date", "end_date", "country",
                                               "cni"],
                                   columns=[0, 1, 2, 3])
 
-        action_deauthorize = Action(description="Deauthorize Sailors",
-                                    script="deauthorize_sailors.cgi",
+        action_deauthorize = Action(description="Deauthorise Sailors",
+                                    script="deauthorise_sailor.cgi",
                                     parameters=["start_date", "end_date", "country",
                                                 "cni"],
                                     columns=[0, 1, 2, 3])

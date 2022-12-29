@@ -16,8 +16,15 @@ def add_sailor_update():
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
 
+        query_senior = "DELETE FROM senior WHERE email=%s;"
+        cursor.execute(query_senior, (email,))
+
+        query_junior = "DELETE FROM junior WHERE email=%s;"
+        cursor.execute(query_junior, (email,))
+
         query = "DELETE FROM sailor WHERE email=%s;"
         cursor.execute(query, (email,))
+
         connection.commit()
 
         print_html(query % email, "Sailor removed", "SAILORS")

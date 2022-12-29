@@ -21,8 +21,11 @@ of boat {cni} from {country} between {start_date} and {end_date}?</p>"
                             f"/cgi-bin/reservation/remove_reservation_update.cgi?start_date={start_date}&\
 end_date={end_date}&country={country}&cni={cni}",
                             color="danger")
+
+        cancel_button = get_button("Cancel",
+                                   "/cgi-bin/reservation/reservation.cgi")
         
-        print_html(confirmation + button, "Remove reservation",
+        print_html(confirmation + button + cancel_button, "Remove reservation",
                    active="RESERVATIONS")
 
     except Exception as e:

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from utils import print_html, connect_to_database, Action
 from utils import get_button, get_html_table
@@ -27,6 +27,7 @@ def add_sailor_update():
         query = "INSERT INTO sailor VALUES (%s, %s, %s);"
         cursor.execute(query, data)
 
+        # CONVERT THIS TO SINGLE QUERY
         if senior == "senior":
             query2 = "INSERT INTO senior VALUES (%s);"
         elif senior == "junior":
@@ -36,7 +37,6 @@ def add_sailor_update():
             cursor.rollback()
 
         cursor.execute(query2, (email,))
-
         connection.commit()
 
         print_html(query % data, "Sailor added", "SAILORS")

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from utils import print_html, connect_to_database, Action
 from utils import get_html_table, get_button
@@ -40,7 +40,7 @@ def reservations():
                                [action_remove, action_authorize, action_deauthorize])
 
         add_reservation_btn = get_button("Add reservation <b>+</b>",
-                                    "add_reservation.cgi")
+                                    "/cgi-bin/reservation/add_reservation.cgi")
 
         print_html(table + add_reservation_btn, "RESERVATIONS", "RESERVATIONS")
     except Exception as e:

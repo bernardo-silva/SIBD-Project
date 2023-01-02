@@ -11,27 +11,27 @@ from credentials import host, port, IST_ID, password, db_name
 def add_sailor_update():
     try:
         form = cgi.FieldStorage()
-        email = form.getvalue('email')
+        takeoff = form.getvalue("takeoff")
+        reservation_start_date = form.getvalue("reservation_start_date")
+        reservation_end_date = form.getvalue("reservation_end_date")
+        boat_country = form.getvalue("boat_country")
+        cni = form.getvalue("cni")
+
+        data = (takeoff, reservation_start_date, reservation_end_date, boat_country, cni)
 
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
 
-        query_senior = "DELETE FROM senior WHERE email=%s;"
-        cursor.execute(query_senior, (email,))
-
-        query_junior = "DELETE FROM junior WHERE email=%s;"
-        cursor.execute(query_junior, (email,))
-
-        query = "DELETE FROM sailor WHERE email=%s;"
-        cursor.execute(query, (email,))
+        query= "DELETE FROM trip WHERE takeoff=%s AND reservation_start_date=%s AND reservation_end_date=%s AND boat_country=%s AND cni=%s;"
+        cursor.execute(query, data)
 
         connection.commit()
 
-        print_html(query % email, "Sailor removed", "SAILORS")
+        print_html(query % data, "Trip removed", "TRIPS")
 
     except Exception as e:
         print_html(
-            f"<h1>An error occurred!</h1><p>{e}</p>", "Error", "SAILORS")
+            f"<h1>An error occurred!</h1><p>{e}</p>", "Error", "TRIPS")
     finally:
         if connection is not None:
             connection.close()

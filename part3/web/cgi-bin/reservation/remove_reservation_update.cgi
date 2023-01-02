@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
+sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
 
 from utils import print_html, connect_to_database
 import cgi
@@ -19,12 +19,27 @@ def remove_reservation_update():
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
 
+        query_trip = "DELETE FROM trip WHERE reservation_start_date=%s AND reservation_end_date=%s AND \
+        boat_country=%s AND cni=%s;"
+        cursor.execute(query_trip, data)
+
+        query_authorised = "DELETE FROM authorised WHERE start_date=%s AND end_date=%s AND \
+        boat_country=%s AND cni=%s;"
+        cursor.execute(query_authorised, data)
+
         query = "DELETE FROM reservation WHERE start_date=%s AND end_date=%s AND \
         country=%s AND cni=%s;"
         cursor.execute(query, data)
+
         connection.commit()
 
-        print_html(query % data, "Reservation removed", "RESERVATIONS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{query%data}</p>\n'
+        body += f'<p>{query_trip%data}</p>\n'
+        body += f'<p>{query_authorised%data}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Reservation removed", "RESERVATIONS")
 
     except Exception as e:
         print_html(

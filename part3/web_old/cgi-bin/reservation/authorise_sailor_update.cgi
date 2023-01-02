@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from credentials import host, port, IST_ID, password, db_name
 import cgi
 from utils import print_html, connect_to_database
 
 
-def deauthorise_sailor_update():
+def authorise_sailor_update():
     try:
         form = cgi.FieldStorage()
         start_date = form.getvalue('start_date')
@@ -21,12 +21,11 @@ def deauthorise_sailor_update():
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
 
-        query = "DELETE FROM authorised WHERE start_date=%s AND end_date=%s AND\
-         boat_country=%s AND cni=%s AND sailor=%s;"
+        query = "INSERT INTO authorised VALUES (%s, %s, %s, %s, %s);"
         cursor.execute(query, data)
         connection.commit()
 
-        print_html(query % data, "Sailor deauthorised", "RESERVATIONS")
+        print_html(query % data, "Sailor authorised", "RESERVATIONS")
 
     except Exception as e:
         print_html(
@@ -37,4 +36,4 @@ def deauthorise_sailor_update():
 
 
 if __name__ == "__main__":
-    deauthorise_sailor_update()
+    authorise_sailor_update()

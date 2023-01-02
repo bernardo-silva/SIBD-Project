@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from credentials import host, port, IST_ID, password, db_name
 from utils import print_html, connect_to_database, Action
@@ -26,7 +26,7 @@ def sailors():
                                [action])
 
         add_sailor_btn = get_button("Add sailor <b>+</b>",
-                                    "add_sailor.cgi")
+                                    "/cgi-bin/sailor/add_sailor.cgi")
 
         print_html(table + add_sailor_btn, "SAILORS", "SAILORS")
     except Exception as e:

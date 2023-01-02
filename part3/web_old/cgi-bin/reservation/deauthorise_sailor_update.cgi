@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
+sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
 
 from credentials import host, port, IST_ID, password, db_name
 import cgi

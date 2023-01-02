@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import cgi
 import sys
-sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
+sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
 
 from credentials import host, port, IST_ID, password, db_name
 from utils import print_html, connect_to_database
@@ -12,8 +12,9 @@ def add_sailor_update():
         form = cgi.FieldStorage()
         start_date = form.getvalue('start_date')
         end_date = form.getvalue('end_date')
-        country = form.getvalue('country')
-        cni = form.getvalue('cni')
+        boat = form.getvalue('boat')
+        country, cni = boat.split(";")
+
         responsible = form.getvalue('responsible')
 
         dates = [start_date, end_date]

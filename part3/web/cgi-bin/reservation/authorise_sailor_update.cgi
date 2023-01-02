@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
+sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
 
 from credentials import host, port, IST_ID, password, db_name
 import cgi
@@ -14,7 +14,7 @@ def authorise_sailor_update():
         end_date = form.getvalue('end_date')
         country = form.getvalue('country')
         cni = form.getvalue('cni')
-        email = form.getvalue('sailor_email')
+        email = form.getvalue('sailor')
 
         data = (start_date, end_date, country, cni, email)
 

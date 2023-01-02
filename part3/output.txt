@@ -1,0 +1,43 @@
+===== Query 1 =====
+
+  | country
+--+---------------------
+1 | Portugal
+
+
+
+===== Query 2 =====
+
+  | sailor
+--+---------------------
+1 | Paulo Carreira
+2 | Pedro Dias
+
+
+
+===== Query 3 =====
+
+  | sailor
+--+---------------------
+1 | Francisco Regateiro
+2 | José Brito
+3 | Xavier Fernandes
+
+
+
+===== Query 4 =====
+
+  | sailor
+--+---------------------
+1 | Xavier Fernandes
+
+
+
+===== Query 5 =====
+
+  | sailor              | sum_trip_duration
+--+---------------------+------------------------------------------------
+1 | Xavier Fernandes    | 2 years 10 mons 28 days 0 hours 0 mins 0.0 secs
+2 | Francisco Regateiro | 2 years 10 mons 28 days 0 hours 0 mins 0.0 secs
+3 | José Brito          | 2 years 10 mons 28 days 0 hours 0 mins 0.0 secs
+

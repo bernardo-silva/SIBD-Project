@@ -16,7 +16,7 @@ HAVING COUNT(*) > ALL (
 );
 
 -- 2. List all the sailors that have at least two certificates.
-SELECT CONCAT(s.firstname, ' ', s.surname)
+SELECT CONCAT(s.firstname, ' ', s.surname) as sailor
 FROM sailing_certificate sc
     JOIN sailor s
         ON s.email = sc.sailor
@@ -25,7 +25,7 @@ HAVING COUNT(*) >= 2;
 
 
 -- 3. Who are the sailors that have sailed to every location in 'Portugal'?
-SELECT CONCAT(s.firstname, ' ', s.surname)
+SELECT CONCAT(s.firstname, ' ', s.surname) as sailor
 FROM sailor s
     JOIN authorised a
         ON s.email = a.sailor
@@ -51,7 +51,7 @@ HAVING COUNT(DISTINCT CONCAT(l.longitude, l.latitude)) = (
 
 
 -- 4. List the sailors with the most skipped trips.
-SELECT CONCAT(s.firstname, ' ', s.surname)
+SELECT CONCAT(s.firstname, ' ', s.surname) as sailor
 FROM trip t
     JOIN sailor s
         ON s.email = t.skipper
@@ -64,7 +64,7 @@ HAVING COUNT(*) >= ALL (
 
 -- 5. List the sailors with the longest duration of trips (sum of trip durations) for the same
 -- single reservation; display also the sum of the trips duration.
-SELECT CONCAT(s.firstname, ' ', s.surname), SUM(AGE(t.arrival,t.takeoff)) AS sum_duration
+SELECT CONCAT(s.firstname, ' ', s.surname) as sailor, SUM(AGE(t.arrival,t.takeoff)) AS sum_trip_duration
 FROM sailor s
     JOIN authorised a
         ON s.email = a.sailor

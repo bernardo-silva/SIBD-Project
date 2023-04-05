@@ -26,7 +26,11 @@ def deauthorise_sailor_update():
         cursor.execute(query, data)
         connection.commit()
 
-        print_html(query % data, "Sailor deauthorised", "RESERVATIONS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{" | ".join(data)}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Sailor deauthorised", "RESERVATIONS")
 
     except Exception as e:
         print_html(

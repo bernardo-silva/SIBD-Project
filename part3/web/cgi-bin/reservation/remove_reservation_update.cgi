@@ -34,9 +34,7 @@ def remove_reservation_update():
         connection.commit()
 
         body = '<div class="text-center">\n'
-        body += f'<p>{query%data}</p>\n'
-        body += f'<p>{query_trip%data}</p>\n'
-        body += f'<p>{query_authorised%data}</p>\n'
+        body += f'<p>{" | ".join(data)}</p>\n'
         body += '</div>\n'
 
         print_html(body, "Reservation removed", "RESERVATIONS")

@@ -27,7 +27,11 @@ def add_sailor_update():
 
         connection.commit()
 
-        print_html(query % email, "Sailor removed", "SAILORS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{email}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Sailor removed", "SAILORS")
 
     except Exception as e:
         print_html(

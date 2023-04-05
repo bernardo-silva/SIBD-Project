@@ -27,7 +27,11 @@ def add_sailor_update():
 
         connection.commit()
 
-        print_html(query % data, "Trip removed", "TRIPS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{" | ".join(data)}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Trip removed", "TRIPS")
 
     except Exception as e:
         print_html(

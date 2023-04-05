@@ -19,6 +19,7 @@ def add_sailor_update():
 
         dates = [start_date, end_date]
         boat = [country, cni]
+        data = (*dates, *boat)
 
         connection = connect_to_database(host, port, IST_ID, password, db_name)
         cursor = connection.cursor()
@@ -31,8 +32,11 @@ def add_sailor_update():
 
         connection.commit()
 
-        print_html(query % tuple(dates + boat + [responsible]),
-                   "Reservation added", "RESERVATIONS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{" | ".join(data)}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Reservation added", "RESERVATIONS")
 
     except Exception as e:
         print_html(

@@ -33,7 +33,11 @@ def add_trip_update():
 
         connection.commit()
 
-        print_html(query % data, "Trip added", "TRIPS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{" | ".join(data)}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Trip added", "TRIPS")
 
     except Exception as e:
         print_html(

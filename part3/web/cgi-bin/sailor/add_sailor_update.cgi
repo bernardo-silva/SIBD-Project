@@ -39,7 +39,11 @@ def add_sailor_update():
 
         connection.commit()
 
-        print_html(query % data, "Sailor added", "SAILORS")
+        body = '<div class="text-center">\n'
+        body += f'<p>{" | ".join(data)} | {"Senior" if senior else "Junior"}</p>\n'
+        body += '</div>\n'
+
+        print_html(body, "Sailor added", "SAILORS")
 
     except Exception as e:
         print_html(

@@ -33,8 +33,9 @@ def deauthorise_sailor_update():
         print_html(body, "Sailor deauthorised", "RESERVATIONS")
 
     except Exception as e:
-        print_html(
-            f"<h1>An error occurred!</h1><p>{e}</p>", "Error", "RESERVATIONS")
+        print_html("", "An error occurred!", "RESERVATIONS")
+        connection.rollback()
+
     finally:
         if connection is not None:
             connection.close()

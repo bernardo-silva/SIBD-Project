@@ -21,8 +21,7 @@ def remove_sailor_form():
         print_html(body, "Remove sailor", active="SAILORS")
 
     except Exception as e:
-        print_html(f"<h1>An error occurred!</h1><p>{e}</p>", "Error",
-                   active="SAILORS")
+        print_html("", "An error occurred!", "SAILORS")
 
 
 if __name__ == "__main__":

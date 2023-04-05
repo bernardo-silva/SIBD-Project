@@ -30,8 +30,8 @@ def sailors():
 
         print_html(table + add_sailor_btn, "SAILORS", "SAILORS")
     except Exception as e:
-        print_html(
-            f"<h1>An error occurred!</h1><p>{e}</p>", "SAILORS", "SAILORS")
+        print_html("", "An error occurred!", "SAILORS")
+        connection.rollback()
     finally:
         if connection is not None:
             connection.close()

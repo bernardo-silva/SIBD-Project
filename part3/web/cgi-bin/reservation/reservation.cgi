@@ -44,8 +44,8 @@ def reservations():
 
         print_html(table + add_reservation_btn, "RESERVATIONS", "RESERVATIONS")
     except Exception as e:
-        print_html(
-            f"<h1>An error occurred!</h1><p>{e}</p>", "RESERVATIONS", "RESERVATIONS")
+        print_html("", "An error occurred!", "RESERVATIONS")
+        connection.rollback()
     finally:
         if connection is not None:
             connection.close()

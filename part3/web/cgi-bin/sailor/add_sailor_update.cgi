@@ -4,12 +4,9 @@ sys.path.insert(0, "/afs/.ist.utl.pt/users/6/5/ist193365/web/sibd")
 
 from utils import print_html, connect_to_database, Action
 from utils import get_button, get_html_table
+from credentials import host, port, IST_ID, password, db_name
 import cgi
 import sys
-
-sys.path.insert(0, "/home/bs/Cloud/5_ano/1_semestre/sibd/project/part3")
-from credentials import host, port, IST_ID, password, db_name
-
 
 def add_sailor_update():
     try:
@@ -46,9 +43,9 @@ def add_sailor_update():
         print_html(body, "Sailor added", "SAILORS")
 
     except Exception as e:
-        print_html(
-            f"<h1>An error occurred!</h1><p>{e}</p>", "Error", "SAILORS")
+        print_html("", "An error occurred!", "SAILORS")
         connection.rollback()
+
     finally:
         if connection is not None:
             connection.close()

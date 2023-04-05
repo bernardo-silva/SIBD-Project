@@ -29,8 +29,8 @@ end_date={end_date}&country={country}&cni={cni}",
         print_html(form, "Authorise sailor", active="RESERVATIONS")
 
     except Exception as e:
-        print_html(f"<h1>An error occurred!</h1><p>{e}</p>", "Error",
-                   active="RESERVATIONS")
+        print_html("", "An error occurred!", "RESERVATIONS")
+        connection.rollback()
 
 
 if __name__ == "__main__":
